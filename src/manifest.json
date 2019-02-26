@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "MaxiPass",
+  "version": "0.1",
+  "description": "MaxiPass Extension",
+  "browser_action": {
+      "default_icon": {
+        "16": "assets/lock.png",
+        "32": "assets/lock.png",
+        "48": "assets/lock.png",
+        "128": "assets/lock.png"
+      },
+      "default_title": "MaxiPass",
+      "default_popup": "pages/popup.html"
+  },
+  "icons": {
+    "16": "assets/lock.png",
+    "32": "assets/lock.png",
+    "48": "assets/lock.png",
+    "128": "assets/lock.png"
+  },
+  "author": "some",
+  "background": {
+      "page": "pages/background.html"
+  },
+  "permissions": [ "tabs" ],
+  "minimum_chrome_version": "60"
+}
