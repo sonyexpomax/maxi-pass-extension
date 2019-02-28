@@ -13,6 +13,14 @@
       "default_title": "MaxiPass",
       "default_popup": "pages/popup.html"
   },
+  "content_scripts" : [
+    {
+      "matches": ["<all_urls>"],
+      "css": [],
+      "js": ["pages/content.js"],
+      "run_at": "document_end"
+    }
+  ],
   "icons": {
     "16": "assets/lock.png",
     "32": "assets/lock.png",
@@ -23,6 +31,6 @@
   "background": {
       "page": "pages/background.html"
   },
-  "permissions": [ "tabs" ],
+  "permissions": [ "activeTab", "notifications" ],
   "minimum_chrome_version": "60"
 }
