@@ -1,6 +1,6 @@
-import apiFactory from ".";
+import apiFactory from "./index";
 import config from './config';
 
 export default apiFactory({
-    apiPrefix: '',
+    apiPrefix: config['API_HOST_development'].apiPrefix,
 });

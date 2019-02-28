@@ -9,49 +9,44 @@ export default class LoginPage extends React.Component {
     };
 
     state = {
-        pass: '',
+        password: '',
         email: '',
         team: '',
-        isValidPass: '',
-        isValidEmail: '',
-        isValidTeam: '',
-    }
+        isValidData: { password: false, team: false },
+        isValidEmail: false,
+    };
 
-    handleChangePassword = ({ target }) => {
+    handleChangeData = ({ target }) => {
+        const { isValidData } = this.state;
         this.setState({
-            pass: target.value,
-            isValidPass: target.value && target.value.length > 2,
+            [target.id]: target.value,
+            isValidData: { ...isValidData, [target.id]: !!(target.value && target.value.length > 2) },
         });
-    }
+    };
 
     handleChangeEmail = ({ target }) => {
         this.setState({
             email: target.value,
-            isValidEmail: target.value && target.value.length > 2,
+            isValidEmail: !!(target.value && target.value.length > 2),
         });
-    }
-
-    handleTeam = ({ target }) => {
-        this.setState({
-            team: target.value,
-            isValidEmail: target.value && target.value.length > 2,
-        });
-    }
+    };
 
     handleSingIn = () => {
         const { signIn } = this.props;
-        const { pass, email, team } = this.state;
-        signIn({ team, email, password: pass });
-    }
+        const { pass, email, team, isValidData, isValidEmail } = this.state;
+        if (isValidData.password && isValidEmail && isValidData.team) {
+            signIn({ team_name: team, email, password: pass });
+        }
+    };
 
     render() {
-        const { pass, email, team, isValidPass, isValidEmail, isValidTeam } = this.state;
+        const { password, email, team, isValidData, isValidEmail } = this.state;
         return (
             <div className="mpe-popup-login">
                 <Form onSubmit={this.handleSingIn}>
                     <Form.Field>
                         <label htmlFor="team" className="mpe-popup-login__label">Team name</label>
-                        <input id="team" type='text' placeholder='Enter team name...' onChange={this.handleTeam} value={team}/>
+                        <input id="team" type='text' placeholder='Enter team name...' onChange={this.handleChangeData} value={team}/>
                     </Form.Field>
                     <Form.Field>
                         <label htmlFor="email" className="mpe-popup-login__label">Email</label>
@@ -59,12 +54,13 @@ export default class LoginPage extends React.Component {
                     </Form.Field>
                     <Form.Field>
                         <label htmlFor="password" className="mpe-popup-login__label">Password</label>
-                        <input id="password" type='password' placeholder='Enter password...' onChange={this.handleChangePassword} value={pass}/>
+                        <input id="password" type='password' placeholder='Enter password...' onChange={this.handleChangeData} value={password}/>
                     </Form.Field>
                     <Button
                         className="mpe-popup-login__button"
                         type='submit'
-                        disabled={!(isValidPass && isValidEmail && isValidTeam)}
+                        positive
+                        disabled={!(isValidData.password && isValidEmail && isValidData.team)}
                     >
                         Sign in
                     </Button>

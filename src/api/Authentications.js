@@ -2,16 +2,12 @@ import Base from './Base';
 import config from './config';
 
 export default class Authentifications extends Base {
-    signIn({ team, email, password }) {
-        console.log(`team: =${team}`);
-        return this.apiClient.post(`http://localhost:3000/${team}/sign_in`, { email, password });
+    signIn(data) {
+        return this.apiClient.post(config.authentication.signIn, data);
     }
 
     signOut() {
-        return this.apiClient.delete(config.authentication.signOut);
+        return this.apiClient.post(config.authentication.signOut);
     }
 
-    keepAlive() {
-        return this.apiClient.post(config.authentication.keepAlive, {});
-    }
 }
