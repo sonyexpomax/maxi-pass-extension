@@ -1,0 +1,11 @@
+.mpe-content {
+    position: absolute;
+    bottom: 100px;
+    z-index: 111111111;
+}
+
+.mpe-content__app {
+    height: 100px;
+    background-color: aquamarine;
+    width: 100px;
+}
