@@ -11,6 +11,12 @@ export const SIGN_OUT_ERROR = 'SIGN_OUT_ERROR';
 export function signInRequest() {
     return {
         type: SIGN_IN_REQUEST,
+    };
+}
+
+export function signOutRequest() {
+    return {
+        type: SIGN_OUT_REQUEST,
         payload: {},
     };
 }
@@ -18,34 +24,29 @@ export function signInRequest() {
 export function signIn(data) {
     return (dispatch, getState) => {
         dispatch(signInRequest());
-        // dispatch(saveReferrer(document.referrer));
         return api.authentications.signIn(data)
             .then(({ data, headers, error }) => {
                 console.log(data);
                 console.log(headers);
                 if (data && headers) {
                     dispatch(signInSuccess(data));
-                    // const cookieLocale = Cookies.get('locale');
-                    // const userLocale = data.language;
-                    // if ((cookieLocale === 'ar' && userLocale !== 'ar') || (cookieLocale !== 'ar' && userLocale === 'ar')) {
-                    //     window.location.reload();
-                    // } else {
-                    //     dispatch(setLocaleSuccess(data.language));
-                    //     dispatch(connectPlatform());
-                    //     dispatch(signInSuccess(data));
-                    //     webSocketClient.initialize(dispatch, headers);
-                    //     if (getIsChatEnabledState(getState())) {
-                    //         chat.initialize(dispatch, headers);
-                    //     }
-                    //     wakeUp(dispatch, getState);
-                    //     currentTime.startCountdown();
-                    //     if (!getState().routing.locationBeforeTransitions.pathname.includes('posts')) {
-                    //         dispatch(replace('/'));
-                    //     }
-                    // }
                 } else {
                     dispatch(signInError());
-                    // dispatch(showNotification({status: 'error', message: error.toString()}));
+                }
+            });
+    };
+}
+export function signOut(data) {
+    return (dispatch, getState) => {
+        dispatch(signOutRequest());
+        return api.authentications.signIn(data)
+            .then(({ data, headers, error }) => {
+                console.log(data);
+                console.log(headers);
+                if (data && headers) {
+                    dispatch(signOutSuccess());
+                } else {
+                    dispatch(signOutError());
                 }
             });
     };
@@ -54,6 +55,19 @@ export function signIn(data) {
 export function signInError() {
     return { type: SIGN_IN_ERROR };
 }
+
 export function signInSuccess(data) {
+    return { type: SIGN_IN_SUCCESS, payload: data };
+}
+
+export function signOutError() {
+    return { type: SIGN_OUT_ERROR };
+}
+
+export function signOutSuccess() {
+    return { type: SIGN_OUT_SUCCESS };
+}
+
+export function updateHeaders(data) {
     return { type: SIGN_IN_SUCCESS, payload: data };
 }
