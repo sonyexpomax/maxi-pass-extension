@@ -1,0 +1,16 @@
+.mpe-popup-menu {
+  margin-top: 20px;
+  &__column {
+    padding: 0 5px !important;
+    &-right {
+      padding: 0 15px 0 5px !important;
+      color: #000 !important;
+    }
+    &-item {
+      color: white !important;
+      .active-item {
+        color: #000 !important;
+      }
+    }
+  }
+}

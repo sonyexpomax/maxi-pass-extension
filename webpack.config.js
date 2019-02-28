@@ -27,6 +27,10 @@ module.exports = {
             'babel-polyfill',
             `${PAGES_PATH}/popup`,
         ],
+        content: [
+            'babel-polyfill',
+            `${PAGES_PATH}/content`,
+        ],
     },
     output: {
         path: path.resolve('dist/pages'),
@@ -50,6 +54,9 @@ module.exports = {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
             },
+            {
+                test: /\.scss$/,
+                use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'] })) },
         ],
     },
     plugins: [

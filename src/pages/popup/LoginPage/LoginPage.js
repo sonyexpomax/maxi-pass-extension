@@ -1,5 +1,6 @@
+import './LoginPage.scss';
 import React from 'react';
-import { Form, Button, Checkbox } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import PropTypes from "prop-types";
 
 export default class LoginPage extends React.Component {
@@ -11,51 +12,62 @@ export default class LoginPage extends React.Component {
         pass: '',
         email: '',
         team: '',
+        isValidPass: '',
+        isValidEmail: '',
+        isValidTeam: '',
     }
 
     handleChangePassword = ({ target }) => {
-        this.setState({ pass: target.value });
+        this.setState({
+            pass: target.value,
+            isValidPass: target.value && target.value.length > 2,
+        });
     }
 
     handleChangeEmail = ({ target }) => {
-        this.setState({ email: target.value });
+        this.setState({
+            email: target.value,
+            isValidEmail: target.value && target.value.length > 2,
+        });
     }
 
     handleTeam = ({ target }) => {
-        console.log(target.value);
-        this.setState({ team: target.value });
+        this.setState({
+            team: target.value,
+            isValidEmail: target.value && target.value.length > 2,
+        });
     }
 
     handleSingIn = () => {
         const { signIn } = this.props;
         const { pass, email, team } = this.state;
-        console.log('handleSingIn');
-        console.log(team, email, pass);
         signIn({ team, email, password: pass });
     }
 
     render() {
-        const { pass, email, team } = this.state;
-        console.log('render login page');
+        const { pass, email, team, isValidPass, isValidEmail, isValidTeam } = this.state;
         return (
-            <div className="ddd">
+            <div className="mpe-popup-login">
                 <Form onSubmit={this.handleSingIn}>
                     <Form.Field>
-                        <label>Team name</label>
-                        <input type='text' placeholder='Enter team name' onChange={this.handleTeam} value={team}/>
+                        <label htmlFor="team" className="mpe-popup-login__label">Team name</label>
+                        <input id="team" type='text' placeholder='Enter team name...' onChange={this.handleTeam} value={team}/>
                     </Form.Field>
                     <Form.Field>
-                        <label>Email</label>
-                        <input type='email' placeholder='Enter email' onChange={this.handleChangeEmail} value={email}/>
+                        <label htmlFor="email" className="mpe-popup-login__label">Email</label>
+                        <input id="email" type='email' placeholder='Enter email...' onChange={this.handleChangeEmail} value={email}/>
                     </Form.Field>
                     <Form.Field>
-                        <label>Password</label>
-                        <input type='password' placeholder='Enter password' onChange={this.handleChangePassword} value={pass}/>
+                        <label htmlFor="password" className="mpe-popup-login__label">Password</label>
+                        <input id="password" type='password' placeholder='Enter password...' onChange={this.handleChangePassword} value={pass}/>
                     </Form.Field>
-                    <Form.Field>
-                        <Checkbox label='I agree to the Terms and Conditions' />
-                    </Form.Field>
-                    <Button type='submit'>Submit</Button>
+                    <Button
+                        className="mpe-popup-login__button"
+                        type='submit'
+                        disabled={!(isValidPass && isValidEmail && isValidTeam)}
+                    >
+                        Sign in
+                    </Button>
                 </Form>
             </div>
         );

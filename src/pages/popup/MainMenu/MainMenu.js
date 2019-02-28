@@ -1,3 +1,4 @@
+import './MainMenu.scss';
 import React from 'react';
 import { Segment, Grid, Menu } from 'semantic-ui-react';
 import PropTypes from "prop-types";
