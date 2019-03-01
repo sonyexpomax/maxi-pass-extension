@@ -21,7 +21,6 @@ export function signInSuccess(data) {
 }
 
 export function signOutRequest() {
-    console.log('signOutRequest');
     return { type: SIGN_OUT_REQUEST, payload: {} };
 }
 
@@ -48,8 +47,8 @@ export function signIn(data) {
             });
     };
 }
+
 export function signOut(data) {
-    console.log('out');
     return (dispatch, getState) => {
         dispatch(signOutRequest());
         return api.authentications.signOut(data)

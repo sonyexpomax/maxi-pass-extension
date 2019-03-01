@@ -3,6 +3,7 @@ import React from 'react';
 import { Segment, Grid, Menu } from 'semantic-ui-react';
 import PropTypes from "prop-types";
 import MainMenuItem from './MainMenuItem';
+import Logins from '../Logins';
 
 export default class MainMenu extends React.Component {
     static propTypes = {
@@ -28,11 +29,8 @@ export default class MainMenu extends React.Component {
                             <MainMenuItem onSelect={logOut} active={activeItem} name='Logout' />
                         </Menu>
                     </Grid.Column>
-
                     <Grid.Column stretched width={10} className="mpe-popup-menu__column-right">
-                        <Segment>
-                            This is an stretched grid column. This segment will always match the tab height
-                        </Segment>
+                        {activeItem === 'Logins' && <Logins/>}
                     </Grid.Column>
                 </Grid>
             </div>

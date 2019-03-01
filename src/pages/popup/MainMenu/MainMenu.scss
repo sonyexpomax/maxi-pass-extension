@@ -8,7 +8,7 @@
     }
     &-item {
       color: white !important;
-      .active-item {
+      &.active-item {
         color: #000 !important;
       }
     }

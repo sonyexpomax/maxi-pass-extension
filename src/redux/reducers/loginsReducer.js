@@ -1,17 +1,22 @@
 import * as actions from '../actions/loginsActions';
 
 const initialState = {
-    allLogins: {
-        'facebook.com': { id: '111', site: 'facebook.com'},
-        'go.discoverydb.com': { id: '111', site: 'go.discoverydb.com'},
-        'stackoverflow.com': { id: '111', site: 'stackoverflow.com'},
-    },
+    allLogins: [],
+    isLoading: false,
 };
 
 export default function loginsReducer(state = initialState, action) {
     switch (action.type) {
-    case actions.SET_ALL_LOGINS:
-        return state;
+    case actions.GET_LOGINS_REQUEST:
+        return { ...state, isLoading: true };
+    case actions.GET_LOGINS_ERROR:
+        return { ...state, isLoading: false };
+    case actions.GET_LOGINS_SUCCESS:
+        return {
+            ...state,
+            isLoading: false,
+            allLogins: action.data,
+        };
     default:
         return state;
     }
