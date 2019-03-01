@@ -1,59 +1,86 @@
 {
-  "name": "maxi_pass_extension",
+  "version": "1.9.0",
+  "private": true,
+  "name": "MaxiPass-extension",
   "description": "MaxiPass Chrome extension",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:user/repo.git"
-  },
-  "version": "0.0.1",
-  "author": {
-    "name": "WizardsDev"
-  },
-  "license": "MIT",
+  "main": "index.js",
   "scripts": {
-    "build": "webpack --watch --progress"
+    "build": "NODE_ENV=production webpack --display-error-details --colors",
+    "dev": "webpack --display-error-details --colors --watch --progress",
+    "start": "web-ext run -s extension/",
+    "clean": "rm -rf extension/",
+    "deploy": "web-ext build -s extension/"
   },
+  "author": "WizardsDev",
+  "license": "MIT",
+  "browserslist": [
+    "last 2 chrome versions",
+    "last 2 firefox versions",
+    "last 2 opera versions"
+  ],
   "dependencies": {
-    "axios": "^0.16.2",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "dotenv": "^6.2.0",
-    "file-loader": "^0.11.2",
+    "axios": "^0.18.0",
     "prop-types": "^15.7.2",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "react-redux": "^4.4.6",
-    "redux": "^3.6.0",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
-    "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.73.0",
-    "url-loader": "^0.5.9",
-    "webext-redux": "^2.0.1"
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-icons": "^2.2.7",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-promise-middleware": "^6.0.1",
+    "redux-react-hook": "^3.1.0",
+    "redux-thunk": "^2.3.0",
+    "redux-watch": "^1.1.1",
+    "redux-webext": "^1.1.2",
+    "semantic-ui-react": "^0.85.0"
+  },
+  "resolutions": {
+    "upath": "^1.1.0"
   },
   "devDependencies": {
-    "babel-core": "^6.25.0",
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^7.1.1",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "copy-webpack-plugin": "^4.0.1",
+    "babel-loader": "8.0.5",
+    "copy-webpack-plugin": "^4.6.0",
     "css-hot-loader": "^1.4.3",
     "css-loader": "^0.28.7",
     "eslint": "^5.14.1",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-xo-nextjs": "^1.3.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jest": "^22.3.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "html-webpack-plugin": "^2.30.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.2.0",
+    "imagemin-webpack-plugin": "^2.4.2",
+    "lerna-changelog": "^0.8.2",
     "node-sass": "^4.11.0",
+    "read-pkg-up": "^4.0.0",
+    "redux-logger": "^3.0.6",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.18.2",
-    "webpack": "^3.5.3",
-    "write-file-webpack-plugin": "^3.4.2"
+    "styled-jsx": "^3.2.1",
+    "styled-jsx-plugin-sass": "^1.0.0",
+    "web-ext": "^3.0.0",
+    "webpack": "^4.29.5",
+    "webpack-bundle-analyzer": "^3.0.4",
+    "webpack-cli": "^3.2.3",
+    "xo": "^0.24.0"
+  },
+  "xo": {
+    "extends": "xo-nextjs",
+    "semicolon": false,
+    "space": 2,
+    "envs": [
+      "browser",
+      "webextensions"
+    ],
+    "rules": {
+      "camelcase": "warn"
+    }
   }
 }

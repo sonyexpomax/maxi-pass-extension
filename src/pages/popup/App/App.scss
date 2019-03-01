@@ -1,9 +1,10 @@
 .mpe-popup {
-  width: 450px;
+  width: 400px;
+  height: 330px;
   background-color: #00488f;
   color: #ffffff;
   &-main {
-    max-height: 400px;
+    height: 330px;
     padding: 10px;
     &__header {
       width: 100%;
